@@ -78,20 +78,32 @@ namespace FeladatokKezelese.Data.Class
             {
                 switch (columnName)
                 {
+                    case "StartYear":
+                        if (StartYear <= 0) return "Adja meg a kezdö évét!";
+                        break;
+
+                    case "StartMonth":
+                        if (StartMonth <= 0) return "Adja meg a kezdő hónapot!";
+                        break;
+
+                    case "StartDay":
+                        if (StartDay <= 0) return "Adja meg a kezdö napot!";
+                        break;
+
+                    case "StartHour":
+                        if (StartHour <= 0) return "Kötelező kitölteni!";
+                        break;
+
+                    case "TaskPeriod":
+                        if (TaskPeriod <= 0) return "Hibás Adat";
+                        break;
+
                     case "TaskName":
                         if (string.IsNullOrEmpty(this.TaskName)) return "Kötelező kitölteni!";
                         break;
 
                     case "TaskDescription":
                         if (string.IsNullOrEmpty(this.TaskDescription)) return "Kötelező kitölteni!";
-                        break;
-
-                    case "StartYear":
-                        if (StartYear <= 0) return "Hibás adat!";
-                        break;
-
-                    case "TaskPeriod":
-                        if (TaskPeriod <= 0) return "Hibás adat!";
                         break;
 
                     default:

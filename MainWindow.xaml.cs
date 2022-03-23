@@ -39,6 +39,8 @@ namespace FeladatokKezelese
             TaskList.Add(new Tasks() {StartYear = 2020, StartMonth = 04, StartDay = 12, StartHour = 11, TaskPeriod = 7, 
                 TaskName = "Flowchart Designing", TaskDescription = "Planning for ''Darwin's Mistake''" });
 
+
+            
             LBO_TaskList.ItemsSource = TaskList;
 
             SP_10.Visibility = Visibility.Hidden;
@@ -52,7 +54,7 @@ namespace FeladatokKezelese
                 LBO_TaskList.SelectedItem = null;
             }
             SP_10.Visibility = Visibility.Visible;
-            SP_10.DataContext = new Data.Class.Tasks();
+            SP_10.DataContext = new Tasks();
         }
 
         private void BTN_EditTask_Click(object sender, RoutedEventArgs e)
@@ -73,20 +75,39 @@ namespace FeladatokKezelese
 
         private void BTN_Cancel_Click(object sender, RoutedEventArgs e)
         {
+            Cancel();
+        }
+
+        private void Cancel()
+        {
             TBO_StartYear.Text = null;
             TBO_StartMonth.Text = null;
             TBO_StartDay.Text = null;
-            TBO_StartHour.Text = null;    
+            TBO_StartHour.Text = null;
             TBO_TaskPeriod.Text = null;
             TBO_TaskName.Text = null;
             TBO_TaskDescription.Text = null;
-            SP_10.Visibility= Visibility.Hidden;
+            SP_10.Visibility = Visibility.Hidden;
         }
 
+
+        private void SaveTask()
+        {
+            TaskList.Add(new Tasks()
+            {
+                StartYear = Convert.ToInt32(TBO_StartYear.Text),
+                StartMonth = Convert.ToInt32(TBO_StartMonth.Text),
+                StartDay = Convert.ToInt32(TBO_StartDay.Text),
+                StartHour = Convert.ToInt32(TBO_StartHour.Text),
+                TaskPeriod = Convert.ToInt32(TBO_TaskPeriod.Text),
+                TaskName = TBO_TaskName.Text,
+                TaskDescription = TBO_TaskDescription.Text,
+            });
+            LBO_TaskList.ItemsSource = TaskList;
+            Cancel();
+        }
         public void  NewTask()
         {
-
-
             if (string.IsNullOrEmpty(TBO_StartYear.Text))
             {
                 TBO_StartYear.Text = DateTime.Now.Year.ToString();
@@ -115,34 +136,27 @@ namespace FeladatokKezelese
                             {
                                 TBO_TaskPeriod.Foreground = Brushes.Red;
                                 TBO_TaskPeriod.Text= "Kötelező Kitölteni";
+                                TBO_TaskPeriod.Foreground = Brushes.Black;
                             }
                             else
                             {
                                 if (string.IsNullOrEmpty(TBO_TaskName.Text))
                                 {
-                                    TBO_TaskPeriod.Foreground = Brushes.Red;
-                                    TBO_TaskPeriod.Text = "Kötelező Kitölteni";
+                                    TBO_TaskName.Foreground = Brushes.Red;
+                                    TBO_TaskName.Text = "Kötelező Kitölteni";
+                                    TBO_TaskName.Foreground = Brushes.Black;
                                 }
                                 else
                                 {
                                     if (string.IsNullOrEmpty(TBO_TaskDescription.Text))
                                     {
-                                        TBO_TaskPeriod.Foreground = Brushes.Red;
-                                        TBO_TaskPeriod.Text = "Kötelező Kitölteni";
+                                        TBO_TaskDescription.Foreground = Brushes.Red;
+                                        TBO_TaskDescription.Text = "Kötelező Kitölteni";
+                                        TBO_TaskDescription.Foreground = Brushes.Black;
                                     }
                                     else
                                     {
-                                        TaskList.Add(new Tasks()
-                                        { 
-                                            StartYear = Convert.ToInt32(TBO_StartYear.Text),
-                                            StartMonth = Convert.ToInt32(TBO_StartMonth.Text),
-                                            StartDay = Convert.ToInt32(TBO_StartDay.Text),
-                                            StartHour = Convert.ToInt32(TBO_StartHour.Text),
-                                            TaskPeriod = Convert.ToInt32(TBO_TaskPeriod.Text),
-                                            TaskName = TBO_TaskName.Text,
-                                            TaskDescription = TBO_TaskDescription.Text,
-                                        });
-                                        LBO_TaskList.ItemsSource = TaskList;
+                                        SaveTask();
                                     }
                                 }
                             }

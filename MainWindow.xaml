@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FeladatokKezelese"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -94,7 +94,7 @@
             <Label Content="TaskPeriod"/>
             <TextBox x:Name="TBO_TaskPeriod" Margin="5">
                 <TextBox.Text>
-                    <Binding Path="TaskPeriod" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                    <Binding Path="TaskPeriod" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <DataErrorValidationRule/>
                             <local:StringToIntValidationRule ValidationStep="RawProposedValue"/>
